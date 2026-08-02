@@ -14,24 +14,25 @@ Rules
 
 Combos and Values
 
-    - Large Straight (1500 points) - Single roll - ex: 1,2,3,4,5,6
+- Large Straight (1500 points) - Single roll - ex: 1,2,3,4,5,6
 
-    - Four of a kind (x * 200 points) + (100 for each kind in next rolls)
-        - Single roll +
-        - Dies of same kind in additional rolls add 100 points
-        - ex: 3,3,3,3 = 600 points + 100 for every new 3 in next rolls
+- Four of a kind (x * 200 points) + (100 for each kind in next rolls)
+    - Single roll +
+    - Dies of same kind in additional rolls add 100 points
+    - ex: 3,3,3,3 = 600 points + 100 for every new 3 in next rolls
 
-    - Tuples (2500 points)
-        - Single roll
-        - three of two numbers
-        - ex: 4,4,4,6,6,6
+- Tuples (2500 points)
+    - Single roll
+    - three of two numbers
+    - ex: 4,4,4,6,6,6
 
-    - Three Pairs (500 points)
-        - single roll
-        - ex: 6,6,4,4,3,3
+- Three Pairs (500 points)
+    - single roll
+    - ex: 6,6,4,4,3,3
 
-    - Three of a Kind (x * 100 points) + (100 for each kind in next rolls)
-        - ex: 4,4,4 = 400 points + 100 for every new 4 in next rolls
+- Three of a Kind (x * 100 points) + (100 for each kind in next rolls)
+    - ex: 4,4,4 = 400 points + 100 for every new 4 in next rolls
 
-    - 1's Solo (100 points)
-    - 5's Solo (50 points)
+- 1's Solo (100 points)
+
+- 5's Solo (50 points)
