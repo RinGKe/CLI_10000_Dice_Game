@@ -1,5 +1,5 @@
 - Description
-  This is a simple CLI version of a game my family created and likes to play called 10,000. 10,000 is originaly played with dice where you take turns rolling dice to score points. The first to reach 10,000 points wins. Not rolling specific numbers can result in a bust where you lose all of the points gained during that turn.
+  This is a simple CLI version of a game my family created and likes to play called 10,000. Originaly played with dice, you take turns rolling to score points. The first to reach 10,000 points wins. Not rolling specific numbers can result in a bust where you lose all of the points gained during that turn. This version is you against a CPU player.
 
 - Rules
     - Need to roll at least 1,000 points in one turn to get on the board
