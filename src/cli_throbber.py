@@ -6,7 +6,7 @@ import time
 
 
 class CLI_Throbber:
-    def __init__(self, message="", time=3.0, speed=0.124) -> None:
+    def __init__(self, message="", time=0.0, speed=0.124) -> None:
         self.message = message
         self.time = time
         self.speed = speed
@@ -32,18 +32,24 @@ class CLI_Throbber:
         bar = "|" + ("-" * size) + "|"
         copy = bar
         while True:
-            print(f"\r{self.message} {throbber[n]} {bar}", end="")
+            if self.time > 0:
+                print(f"\r{self.message} {throbber[n]} {bar}", end="")
+                t += self.speed
+                bar = copy.replace("-", "#", math.ceil(size * (t / self.time)))
+            else:
+                print(f"\r{self.message} {throbber[n]}", end="")
+
             n += 1
-            t += self.speed
-            bar = copy.replace("-", "#", math.ceil(size * (t / self.time)))
             if n >= len(throbber):
                 n = 0
+
             time.sleep(self.speed)
 
     def start(self):
         self.process.start()
-        time.sleep(self.time)
-        self.stop()
+        if self.time > 0:
+            time.sleep(self.time)
+            self.stop()
 
     def stop(self):
         if not self.process.is_alive():
@@ -51,8 +57,3 @@ class CLI_Throbber:
         else:
             self.process.terminate()
             print()
-
-
-if __name__ == "__main__":
-    throbber = CLI_Throbber("Rolling...", 2)
-    throbber.start()
