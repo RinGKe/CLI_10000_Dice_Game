@@ -21,7 +21,7 @@ Combos and Values
     - Dies of same kind in additional rolls add 100 points
     - ex: 3,3,3,3 = 600 points + 100 for every new 3 in next rolls
 
-- Tuples (2500 points)
+- Double Trips (2500 points)
     - Single roll
     - three of two numbers
     - ex: 4,4,4,6,6,6
