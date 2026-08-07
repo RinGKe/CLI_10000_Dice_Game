@@ -77,11 +77,11 @@ def score_dice(dice: list[int]) -> tuple[int, list[int], dict[str, int]]:
 
     score += remaining.count(1) * 100
     if remaining.count(1) > 0:
-        data["Ones"] = remaining.count(1) * 100
+        data[f"Ones ({remaining.count(1)})"] = remaining.count(1) * 100
 
     score += remaining.count(5) * 50
     if remaining.count(5) > 0:
-        data["Fives"] = remaining.count(5) * 50
+        data[f"Fives ({remaining.count(5)})"] = remaining.count(5) * 50
 
     remaining = [d for d in remaining if (d != 1) and (d != 5)]
 
