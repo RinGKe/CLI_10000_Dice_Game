@@ -14,12 +14,22 @@ Rules
 
 Combos and Values
 
+- Six of a kind ( x * 800 points) + (100 for each kind in next rolls)
+    - Single roll +
+    - Dies of same kind in additional rolls add 100 points
+    - ex: 4,4,4,4,4,4 = 3200 points + 100 for evey new 4 in next rolls
+
+- Five of a kind ( x * 400 points) + (100 for each kind in next rolls)
+    - Single roll +
+    - Dies of same kind in additional rolls add 100 points
+    - ex: 4,4,4,4,4 = 1600 points + 100 for evey new 4 in next rolls
+
 - Large Straight (1500 points) - Single roll - ex: 1,2,3,4,5,6
 
 - Four of a kind (x * 200 points) + (100 for each kind in next rolls)
     - Single roll +
     - Dies of same kind in additional rolls add 100 points
-    - ex: 3,3,3,3 = 600 points + 100 for every new 3 in next rolls
+    - ex: 4,4,4,4 = 800 points + 100 for every new 4 in next rolls
 
 - Double Trips (2500 points)
     - Single roll
