@@ -58,30 +58,30 @@ def score_dice(dice: list[int]) -> tuple[int, list[int], dict[str, int]]:
 
         case Combo.SIX_KIND:
             score += value * Combo.SIX_KIND.value
-            data["Six of a kind"] = value * Combo.SIX_KIND.value
+            data[f"Six of a kind ({value})"] = value * Combo.SIX_KIND.value
 
         case Combo.FIVE_KIND:
             score += value * Combo.FIVE_KIND.value
-            data["Five of a kind"] = value * Combo.FIVE_KIND.value
+            data[f"Five of a kind ({value})"] = value * Combo.FIVE_KIND.value
 
         case Combo.FOUR_KIND:
             score += value * Combo.FOUR_KIND.value
-            data["Four of a kind"] = value * Combo.FOUR_KIND.value
+            data[f"Four of a kind ({value})"] = value * Combo.FOUR_KIND.value
 
         case Combo.THREE_KIND:
             score += value * Combo.THREE_KIND.value
-            data["Three of a kind"] = value * Combo.THREE_KIND.value
+            data[f"Three of a kind ({value})"] = value * Combo.THREE_KIND.value
 
         case Combo.NONE:
             pass
 
     score += remaining.count(1) * 100
     if remaining.count(1) > 0:
-        data["1's"] = remaining.count(1) * 100
+        data["Ones"] = remaining.count(1) * 100
 
     score += remaining.count(5) * 50
     if remaining.count(5) > 0:
-        data["5's"] = remaining.count(5) * 50
+        data["Fives"] = remaining.count(5) * 50
 
     remaining = [d for d in remaining if (d != 1) and (d != 5)]
 

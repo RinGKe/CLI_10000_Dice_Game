@@ -20,7 +20,7 @@ class Dice:
             self.cup_num += 1
         return roll
 
-    def set_selection(self, given_dice: list[int]) -> dict[str, int]:
+    def check_selection(self, given_dice: list[int]) -> dict[str, int]:
         self.current_score, remaining, data = score_dice(given_dice)
         self.active_dice = self.active_dice - (len(given_dice) - len(remaining))
         return data
