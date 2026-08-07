@@ -10,7 +10,7 @@ class Combo(Enum):
     FOUR_KIND = 200
     THREE_PAIRS = 500
     THREE_KIND = 100
-    NONE = 0
+    NONE = 1
 
 
 def eval_dice(dice: list[int]) -> tuple[Combo, int, list[int]]:
@@ -38,27 +38,51 @@ def eval_dice(dice: list[int]) -> tuple[Combo, int, list[int]]:
     return Combo.NONE, 0, dice
 
 
-def score_dice(dice: list[int]) -> int:
+def score_dice(dice: list[int]) -> tuple[int, list[int], dict[str, int]]:
     combo, value, remaining = eval_dice(dice)
     value = 10 if value == 1 else value
+    data = {}
     score = 0
     match combo:
         case Combo.DOUBLE_TRIPS:
-            score += 2500
+            score += Combo.DOUBLE_TRIPS.value
+            data["Double Trips"] = Combo.DOUBLE_TRIPS.value
+
         case Combo.LARGE_STRAIGHT:
-            score += 1500
+            score += Combo.LARGE_STRAIGHT.value
+            data["Large Straight"] = Combo.LARGE_STRAIGHT.value
+
         case Combo.THREE_PAIRS:
-            score += 500
+            score += Combo.THREE_PAIRS.value
+            data["Three Pairs"] = Combo.THREE_PAIRS.value
+
         case Combo.SIX_KIND:
             score += value * Combo.SIX_KIND.value
+            data["Six of a kind"] = value * Combo.SIX_KIND.value
+
         case Combo.FIVE_KIND:
             score += value * Combo.FIVE_KIND.value
+            data["Five of a kind"] = value * Combo.FIVE_KIND.value
+
         case Combo.FOUR_KIND:
             score += value * Combo.FOUR_KIND.value
+            data["Four of a kind"] = value * Combo.FOUR_KIND.value
+
         case Combo.THREE_KIND:
             score += value * Combo.THREE_KIND.value
+            data["Three of a kind"] = value * Combo.THREE_KIND.value
+
         case Combo.NONE:
             pass
+
     score += remaining.count(1) * 100
+    if remaining.count(1) > 0:
+        data["1's"] = remaining.count(1) * 100
+
     score += remaining.count(5) * 50
-    return score
+    if remaining.count(5) > 0:
+        data["5's"] = remaining.count(5) * 50
+
+    remaining = [d for d in remaining if (d != 1) and (d != 5)]
+
+    return score, remaining, data
