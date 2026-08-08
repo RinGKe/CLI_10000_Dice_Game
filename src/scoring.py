@@ -3,6 +3,7 @@ from enum import Enum
 
 
 class Combo(Enum):
+    SPIDER_EYES = 10000
     DOUBLE_TRIPS = 2500
     LARGE_STRAIGHT = 1500
     SIX_KIND = 800
@@ -17,6 +18,8 @@ def eval_dice(dice: list[int]) -> tuple[Combo, int, list[int]]:
     counts = Counter(dice)
     count_values = sorted(counts.values(), reverse=True)
 
+    if dice == [1, 1, 1, 1, 1, 1]:
+        return Combo.SPIDER_EYES, 0, []
     if sorted(dice) == [1, 2, 3, 4, 5, 6]:
         return Combo.LARGE_STRAIGHT, 0, []
     if count_values == [3, 3]:
@@ -44,6 +47,10 @@ def score_dice(dice: list[int]) -> tuple[int, list[int], dict[str, int]]:
     data = {}
     score = 0
     match combo:
+        case Combo.SPIDER_EYES:
+            score += Combo.SPIDER_EYES.value
+            data["SPIDER EYES!"] = Combo.SPIDER_EYES.value
+
         case Combo.DOUBLE_TRIPS:
             score += Combo.DOUBLE_TRIPS.value
             data["Double Trips"] = Combo.DOUBLE_TRIPS.value

@@ -21,8 +21,10 @@ class Dice:
         return roll
 
     def check_selection(self, given_dice: list[int]) -> dict[str, int]:
-        self.current_score, remaining, data = score_dice(given_dice)
+        points, remaining, data = score_dice(given_dice)
+        self.current_score += points
         self.active_dice = self.active_dice - (len(given_dice) - len(remaining))
+        self.active_dice = 6 if self.active_dice == 0 else self.active_dice
         return data
 
     def __repr__(self) -> str:

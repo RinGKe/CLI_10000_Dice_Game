@@ -14,6 +14,11 @@ Rules
 
 Combos and Values
 
+- Spider Eyes (10,000 points)
+    - Single roll
+    - six ones
+    - ex: 1,1,1,1,1,1
+
 - Six of a kind ( x * 800 points) + (100 for each kind in next rolls)
     - Single roll +
     - Dies of same kind in additional rolls add 100 points
