@@ -18,15 +18,18 @@ def test_combos(nums=[]) -> None:
 
 
 def test_machine():
+    total_rounds = 0
     iteration = 0
     total_score = 1000
     current_score = 0
     while True:
         iteration += 1
+        total_rounds += 1
         current_score = test_multi_roll()
         total_score += current_score
         average = round(total_score / iteration)
         print(f"**** TARGET: {average} ****")
+        print(f"**** ROUNDS: {total_rounds} ****")
         if current_score > 10000:
             break
         if iteration == 10:
@@ -38,7 +41,7 @@ def test_machine():
 def test_multi_roll(nums=[]) -> int:
     dice = Dice("CPU")
     while True:
-        time.sleep(0.5)
+        time.sleep(0.1)
         roll = dice.roll_dice()
         if len(roll) == 6:
             print("=================================")
