@@ -1,6 +1,7 @@
 import time
 
 from dice import Dice
+from gamemode import Gamemode
 
 
 def test_combos(nums=[]) -> None:
@@ -62,8 +63,24 @@ def test_multi_roll(nums=[]) -> int:
     return dice.current_score
 
 
-test_machine()
+def test_round():
+    gamemode = Gamemode(player_num=0, cpu_num=3)
+    gamemode.run_round()
+    gamemode.eval_top_score()
 
+
+def test_multi_round(limit: int):
+    gamemode = Gamemode(player_num=0, cpu_num=3)
+    while True:
+        gamemode.run_round()
+        gamemode.eval_top_score()
+        if gamemode.round >= limit:
+            break
+
+
+test_multi_round(3)
+
+"""test_machine()"""
 
 """
 test_combos([1, 2, 3, 4, 5, 6])

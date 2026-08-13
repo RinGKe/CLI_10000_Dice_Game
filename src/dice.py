@@ -1,9 +1,6 @@
 import random
-from collections import Counter
-from enum import Enum
 
-from cli_throbber import CLI_Throbber
-from scoring import eval_dice, score_dice
+from scoring import score_dice
 
 
 class Dice:
