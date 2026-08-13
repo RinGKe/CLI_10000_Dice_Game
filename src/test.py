@@ -78,7 +78,25 @@ def test_multi_round(limit: int):
             break
 
 
-test_multi_round(3)
+def test_full():
+    gamemode = Gamemode(player_num=0, cpu_num=6, speed=0.25)
+    while True:
+        gamemode.run_round()
+        gamemode.eval_top_score()
+        if gamemode.winner[1] != 0:
+            break
+    win_name, win_score = gamemode.winner
+    print()
+    print("******************************")
+    print("******************************")
+    print(f"  {win_name} WON")
+    print("******************************")
+    print("******************************")
+
+
+test_full()
+
+"""test_multi_round(3)"""
 
 """test_machine()"""
 

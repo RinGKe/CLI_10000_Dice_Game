@@ -5,7 +5,7 @@ from dice import Dice
 
 
 class Gamemode:
-    def __init__(self, player_num=1, cpu_num=1, win_score=10000, speed=1) -> None:
+    def __init__(self, player_num=1, cpu_num=1, win_score=10000, speed=1.0) -> None:
         self.win_score = win_score
         self.speed = speed
         self.round = 0
@@ -17,13 +17,15 @@ class Gamemode:
     def player_turn(self) -> int:
         return 0
 
+    def cpu_choice(self, dice: Dice) -> float:
+        return dice.active_dice / dice.amount
+
     def cpu_turn(self, name: str) -> int:
         dice = Dice(name)
-        turn_score = 0
         while True:
             roll = dice.roll_dice()
             if len(roll) == 6:
-                print("==============================")
+                print("=============================\\\\")
                 print(f"Cup: {dice.cup_num}")
             print(f"Rolling {dice.active_dice}...")
             print()
@@ -33,15 +35,15 @@ class Gamemode:
             print(roll)
             data = dice.check_selection(roll)
             if not data:
-                print("******************************")
-                print(f"  BUST {dice.current_score}")
-                print("******************************")
+                print("XxXxXxXxXxXxXxXxXxXxXxXxXxXxXx")
+                print(f"  BUST  {dice.current_score}")
+                print("XxXxXxXxXxXxXxXxXxXxXxXxXxXxXx")
                 return 0
 
             time.sleep(self.speed)
 
             for k, v in data.items():
-                print(f" * {k}: {v}")
+                print(f"  * {k}: {v}")
             print("------------------------")
 
             time.sleep(self.speed / 2)
@@ -50,27 +52,26 @@ class Gamemode:
             print("=========================")
 
             time.sleep(self.speed)
-
-            if random.random() < 0.5:
-                print("******************************")
-                print(f"  SCORED {dice.current_score}")
-                print("******************************")
+            if random.random() < self.cpu_choice(dice):
+                print("<><><><><><><><><><><><><><><>")
+                print(f"  SCORED  {dice.current_score}")
+                print("<><><><><><><><><><><><><><><>")
                 return dice.current_score
 
     def run_round(self) -> None:
         self.round += 1
         print()
         print()
-        print("\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\")
-        print(f"     ROUND {self.round}")
-        print("////////////////////")
+        print("                     \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\")
+        print(f"                         ROUND {self.round}")
+        print("                     ////////////////////")
         for p in self.players:
             time.sleep(self.speed)
             print()
             print()
-            print("//////////")
-            print(f" {p[0]}")
-            print("\\\\\\\\\\\\\\\\\\\\")
+            print("                     //////////")
+            print(f"                      {p[0]}")
+            print("                     \\\\\\\\\\\\\\\\\\\\")
             time.sleep(self.speed)
             if "CPU" in p[0]:
                 p[1] += self.cpu_turn(p[0])
@@ -86,5 +87,6 @@ class Gamemode:
         for i, p in enumerate(places):
             print(f"          {i + 1}: {p[0]} -> {p[1]}")
         print("        ============================")
-        if places[0][1] > self.win_score:
+        if places[0][1] >= self.win_score:
             self.winner = (places[0][0], places[0][1])
+        time.sleep(self.speed * 4)
