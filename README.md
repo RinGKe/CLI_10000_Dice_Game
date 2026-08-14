@@ -5,12 +5,39 @@ This is a simple CLI version of a game my family created and likes to play calle
 Rules
 
 - Need to roll at least 1,000 points in one turn to get on the board
-- Have to roll at least a '1', a '5', or 'combo' to keep rolling
-- Combos only count on single rolls some can increase in value with additional rolls (+)
+- Have to roll and keep at least a '1', a '5', or 'combo' to keep rolling
+- Not rolling or keeping any scorable dice results in a BUST ending your turn
+- Combos only count on single rolls
+- Some combos can increase in value with additional rolls (+) during the same cup
 - After getting on the board players can stop anytime after their first roll to keep points
 - First player to reach 10,000 points starts 'last round' of rolls
 - After the 'last round' the player with the most points wins
-- 1's count as 10's where die value matters
+- 1's count as 10's where die value matters in combos
+
+CLI Game Directions
+
+- When prompted, you can type a response and press ENTER to submit it
+- Submitting nothing counts as yes to (Y/N) questions
+- Submitting nothing for dice selection auto fills all dice and scores possible combos for you
+- CPU opponents play and make choices by themselves
+
+Game Settings Options
+
+- "Use game setting defaults?":
+    - ENTERING "y" or nothing will use the default game settings of one player, one cpu, and normal speed
+    - ENTERING "n" will lead to additional questions to set the game settings
+- "How many players?":
+    - ENTER the number of live players you want to play
+    - You can enter "0" for this if you want to watch cpus play eachother
+- "How man computer opponents?":
+    - ENTER the number of CPU opponents you want to play
+    - You can enter "0" if you don't want any CPUs playing
+- "Game speed?":
+    - ENTER one of the four given options this determains how fast the game prints information
+    - "Slow": gives plenty of time to read every line as printed
+    - "Normal": a balanced speed for reading lines and good pace
+    - "Fast": difficult to read each line but makes for quicker games
+    - "Hyper": speed is not readable if you only care about the results
 
 Combos and Values
 
