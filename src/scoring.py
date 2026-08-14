@@ -41,10 +41,13 @@ def eval_dice(dice: list[int]) -> tuple[Combo, int, list[int]]:
     return Combo.NONE, 0, dice
 
 
-def score_dice(dice: list[int]) -> tuple[int, list[int], dict[str, int]]:
+def score_dice(
+    dice: list[int], addons: set[int]
+) -> tuple[int, list[int], int, dict[str, int]]:
     combo, value, remaining = eval_dice(dice)
+    new_addon = value
     value = 10 if value == 1 else value
-    data = {}
+    data: dict[str, int] = {}
     score = 0
     match combo:
         case Combo.SPIDER_EYES:
@@ -82,14 +85,20 @@ def score_dice(dice: list[int]) -> tuple[int, list[int], dict[str, int]]:
         case Combo.NONE:
             pass
 
-    score += remaining.count(1) * 100
+    for v in addons:
+        if remaining.count(v) > 0:
+            score += remaining.count(v) * 100
+            data[f"Addons ({remaining.count(v)})"] = remaining.count(v) * 100
+            remaining = [d for d in remaining if d != v]
+
     if remaining.count(1) > 0:
+        score += remaining.count(1) * 100
         data[f"Ones ({remaining.count(1)})"] = remaining.count(1) * 100
+        remaining = [d for d in remaining if d != 1]
 
-    score += remaining.count(5) * 50
     if remaining.count(5) > 0:
+        score += remaining.count(5) * 50
         data[f"Fives ({remaining.count(5)})"] = remaining.count(5) * 50
+        remaining = [d for d in remaining if d != 5]
 
-    remaining = [d for d in remaining if (d != 1) and (d != 5)]
-
-    return score, remaining, data
+    return score, remaining, new_addon, data

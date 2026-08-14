@@ -1,92 +1,62 @@
-import random
 import time
 
-from dice import Dice
+from .player import CPU, Player
 
 
 class Gamemode:
-    def __init__(self, player_num=1, cpu_num=1, win_score=10000, speed=1.0) -> None:
-        self.win_score = win_score
+    def __init__(
+        self,
+        players: int = 1,
+        cpus: int = 1,
+        score: int = 10000,
+        threshold: int = 1000,
+        pause: float = 1.0,
+        speed: float = 1.0,
+    ):
+
+        self.win_score = score
         self.speed = speed
+        self.pause = pause
         self.round = 0
         self.winner = ("", 0)
-        self.players = [[f"Player {x + 1}", 0] for x in range(player_num)] + [
-            [f"CPU {x + 1}", 0] for x in range(cpu_num)
-        ]
-
-    def player_turn(self) -> int:
-        return 0
-
-    def cpu_choice(self, dice: Dice) -> float:
-        return dice.active_dice / dice.amount
-
-    def cpu_turn(self, name: str) -> int:
-        dice = Dice(name)
-        while True:
-            roll = dice.roll_dice()
-            if len(roll) == 6:
-                print("=============================\\\\")
-                print(f"Cup: {dice.cup_num}")
-            print(f"Rolling {dice.active_dice}...")
-            print()
-
-            time.sleep(self.speed * 2)
-
-            print(roll)
-            data = dice.check_selection(roll)
-            if not data:
-                print("XxXxXxXxXxXxXxXxXxXxXxXxXxXxXx")
-                print(f"  BUST  {dice.current_score}")
-                print("XxXxXxXxXxXxXxXxXxXxXxXxXxXxXx")
-                return 0
-
-            time.sleep(self.speed)
-
-            for k, v in data.items():
-                print(f"  * {k}: {v}")
-            print("------------------------")
-
-            time.sleep(self.speed / 2)
-
-            print(f"Rolling Score: {dice.current_score}")
-            print("=========================")
-
-            time.sleep(self.speed)
-            if random.random() < self.cpu_choice(dice):
-                print("<><><><><><><><><><><><><><><>")
-                print(f"  SCORED  {dice.current_score}")
-                print("<><><><><><><><><><><><><><><>")
-                return dice.current_score
+        self.players = [
+            Player(f"Player {x + 1}", threshold) for x in range(players)
+        ] + [CPU(f"CPU {x + 1}", threshold) for x in range(cpus)]
 
     def run_round(self) -> None:
         self.round += 1
         print()
         print()
-        print("                     \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\")
-        print(f"                         ROUND {self.round}")
-        print("                     ////////////////////")
+        print("                          \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\")
+        print(f"                                    ROUND {self.round}")
+        print("                          ////////////////////")
         for p in self.players:
-            time.sleep(self.speed)
+            time.sleep(self.pause)
+
             print()
             print()
-            print("                     //////////")
-            print(f"                      {p[0]}")
-            print("                     \\\\\\\\\\\\\\\\\\\\")
-            time.sleep(self.speed)
-            if "CPU" in p[0]:
-                p[1] += self.cpu_turn(p[0])
-            else:
-                p[1] += self.player_turn()
+            print("                          //////////")
+            print(f"                           {p.name}")
+            print("                          \\\\\\\\\\\\\\\\\\\\")
+
+            time.sleep(self.pause)
+
+            p.play_turn(self.speed)
 
     def eval_top_score(self) -> None:
-        time.sleep(self.speed)
-        places = sorted(self.players, key=lambda x: x[1], reverse=True)
+        time.sleep(self.pause)
+        places = sorted(self.players, key=lambda x: x.score, reverse=True)
         print()
         print("        ============================")
         print(f"         [Round {self.round} results]")
+        longest = 0
+        for p in places:
+            longest = longest if len(p.name) < longest else len(p.name)
         for i, p in enumerate(places):
-            print(f"          {i + 1}: {p[0]} -> {p[1]}")
+            len_dif = longest - len(p.name)
+            buffer = " " * (2 if ((i + 1) < 10) and len(places) > 9 else 0)
+            print(f"           {i + 1}: {buffer}{p.name} {'-' * len_dif}--> {p.score}")
         print("        ============================")
-        if places[0][1] >= self.win_score:
-            self.winner = (places[0][0], places[0][1])
-        time.sleep(self.speed * 4)
+        if places[0].score >= self.win_score:
+            self.winner = (places[0].name, places[0].score)
+        time.sleep(2 if (self.pause * 2) < 2 else (self.pause * 2))

@@ -1,10 +1,10 @@
 import time
 
-from dice import Dice
-from gamemode import Gamemode
+from .dice import Dice
+from .gamemode import Gamemode
 
 
-def test_combos(nums=[]) -> None:
+def test_combos(nums: list[int]) -> None:
     dice = Dice("Player")
     roll = nums if nums else dice.roll_dice()
     print(roll)
@@ -19,14 +19,14 @@ def test_combos(nums=[]) -> None:
 
 
 def test_machine():
-    total_rounds = 0
-    iteration = 0
-    total_score = 1000
-    current_score = 0
+    total_rounds: int = 0
+    iteration: int = 0
+    total_score: int = 1000
+    current_score: int = 0
     while True:
         iteration += 1
         total_rounds += 1
-        current_score = test_multi_roll()
+        current_score = test_multi_roll(nums=[])
         total_score += current_score
         average = round(total_score / iteration)
         print(f"**** TARGET: {average} ****")
@@ -39,11 +39,12 @@ def test_machine():
         time.sleep(0.5)
 
 
-def test_multi_roll(nums=[]) -> int:
+def test_multi_roll(nums: list[int]) -> int:
     dice = Dice("CPU")
     while True:
         time.sleep(0.1)
-        roll = dice.roll_dice()
+        roll = nums if nums else dice.roll_dice()
+        nums = []
         if len(roll) == 6:
             print("=================================")
             print(f"Cup: {dice.cup_num}")
@@ -64,13 +65,13 @@ def test_multi_roll(nums=[]) -> int:
 
 
 def test_round():
-    gamemode = Gamemode(player_num=0, cpu_num=3)
+    gamemode = Gamemode(players=0, cpus=3)
     gamemode.run_round()
     gamemode.eval_top_score()
 
 
 def test_multi_round(limit: int):
-    gamemode = Gamemode(player_num=0, cpu_num=3)
+    gamemode = Gamemode(players=0, cpus=3)
     while True:
         gamemode.run_round()
         gamemode.eval_top_score()
@@ -79,7 +80,7 @@ def test_multi_round(limit: int):
 
 
 def test_full():
-    gamemode = Gamemode(player_num=0, cpu_num=6, speed=0.25)
+    gamemode = Gamemode(players=0, cpus=3, speed=0.01, pause=0.1)
     while True:
         gamemode.run_round()
         gamemode.eval_top_score()
@@ -90,21 +91,21 @@ def test_full():
     print("******************************")
     print("******************************")
     print(f"  {win_name} WON")
+    print(f"  {win_score} WON")
     print("******************************")
     print("******************************")
 
 
 test_full()
 
-"""test_multi_round(3)"""
+# test_multi_round(3)
 
-"""test_machine()"""
+# test_machine()
 
-"""
-test_combos([1, 2, 3, 4, 5, 6])
-test_combos([4, 4, 4, 6, 6, 6])
-test_combos([2, 2, 3, 3, 4, 4])
-test_combos([1, 1, 1, 1, 1, 1])
-test_combos([2, 3, 4, 6, 2, 4])
-test_combos()
-"""
+
+# test_combos([1, 2, 3, 4, 5, 6])
+# test_combos([4, 4, 4, 6, 6, 6])
+# test_combos([2, 2, 3, 3, 4, 4])
+# test_combos([1, 1, 1, 1, 1, 1])
+# test_combos([2, 3, 4, 6, 2, 4])
+# test_combos()

@@ -1,3 +1,2 @@
-#!/bin/sh
-clear
+@echo off
 python3 -m src.main
