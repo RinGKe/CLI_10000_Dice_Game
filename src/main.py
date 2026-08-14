@@ -1,3 +1,5 @@
+import sys
+
 from .gamemode import Gamemode
 
 speed_defaults = {
@@ -86,6 +88,8 @@ def main():
     print(f"  {win_score} WON")
     print("******************************")
     print("******************************")
+    end = input()
+    sys.exit()
 
 
 if __name__ == "__main__":

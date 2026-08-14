@@ -54,7 +54,7 @@ class Gamemode:
             longest = longest if len(p.name) < longest else len(p.name)
         for i, p in enumerate(places):
             len_dif = longest - len(p.name)
-            buffer = " " * (2 if ((i + 1) < 10) and len(places) > 9 else 0)
+            buffer = " " * (1 if ((i + 1) < 10) and len(places) > 9 else 0)
             print(f"           {i + 1}: {buffer}{p.name} {'-' * len_dif}--> {p.score}")
         print("        ============================")
         if places[0].score >= self.win_score:

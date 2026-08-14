@@ -1,3 +1,3 @@
 @echo off
-clear
+cls
 python3 -m src.main

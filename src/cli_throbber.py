@@ -55,7 +55,7 @@ class CLI_Throbber:
         self.process.start()
         if self.time > 0:
             if self.time >= self.speed:
-                time.sleep(self.adj_time + 0.015)
+                time.sleep(self.adj_time + 0.1)
                 self.stop()
             else:
                 print(self.message, end="")
