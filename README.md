@@ -56,7 +56,13 @@ Combos and Values
     - Dies of same kind in additional rolls add 100 points
     - ex: 4,4,4,4,4 = 1600 points + 100 for evey new 4 in next rolls
 
-- Large Straight (1500 points) - Single roll - ex: 1,2,3,4,5,6
+- Large Straight (1500 points)
+    - Single roll
+    - ex: 1,2,3,4,5,6
+
+- Small Straight (1000 points)
+    - Single roll
+    - ex 1,2,3,4,5
 
 - Four of a kind (x * 200 points) + (100 for each kind in next rolls)
     - Single roll +

@@ -88,7 +88,7 @@ def main():
     print(f"  {win_score} WON")
     print("******************************")
     print("******************************")
-    end = input()
+    _ = input()
     sys.exit()
 
 

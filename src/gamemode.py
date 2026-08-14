@@ -51,7 +51,7 @@ class Gamemode:
         print(f"         [Round {self.round} results]")
         longest = 0
         for p in places:
-            longest = longest if len(p.name) < longest else len(p.name)
+            longest = max(len(p.name), longest)
         for i, p in enumerate(places):
             len_dif = longest - len(p.name)
             buffer = " " * (1 if ((i + 1) < 10) and len(places) > 9 else 0)
@@ -59,4 +59,4 @@ class Gamemode:
         print("        ============================")
         if places[0].score >= self.win_score:
             self.winner = (places[0].name, places[0].score)
-        time.sleep(2 if (self.pause * 2) < 2 else (self.pause * 2))
+        time.sleep(max(self.pause * 2, 2))

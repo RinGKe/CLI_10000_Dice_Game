@@ -26,8 +26,15 @@ class Player:
 
             print(roll)
 
-            print("Select dice to keep... :")
-            selection = [int(c) for c in input() if c.isdigit()]
+            user_input = [
+                int(x) for x in input("Select dice to keep... :\n") if x.isdigit()
+            ]
+            roll_copy = roll.copy()
+            selection = []
+            for c in user_input:
+                if c in roll_copy:
+                    selection.append(int(c))
+                    roll_copy.remove(int(c))
             if not selection:
                 selection = roll
             print("\033[F\033[K", end="\r")
@@ -75,7 +82,7 @@ class Player:
             entered = input()
             while entered not in ("y", "n", ""):
                 print("\033[F\033[K", end="\r")
-                enter = input()
+                _ = input()
 
             if entered == "y" or entered == "":
                 roll_throb.stop()

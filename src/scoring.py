@@ -6,22 +6,34 @@ class Combo(Enum):
     SPIDER_EYES = 10000
     DOUBLE_TRIPS = 2500
     LARGE_STRAIGHT = 1500
+    SMALL_STRAIGHT = 1000
     SIX_KIND = 800
     FIVE_KIND = 400
     FOUR_KIND = 200
-    THREE_PAIRS = 500
+    THREE_PAIRS = 750
     THREE_KIND = 100
     NONE = 1
 
 
 def eval_dice(dice: list[int]) -> tuple[Combo, int, list[int]]:
     counts = Counter(dice)
+    dice_set = set(dice)
     count_values = sorted(counts.values(), reverse=True)
 
     if dice == [1, 1, 1, 1, 1, 1]:
         return Combo.SPIDER_EYES, 0, []
     if sorted(dice) == [1, 2, 3, 4, 5, 6]:
         return Combo.LARGE_STRAIGHT, 0, []
+
+    if {1, 2, 3, 4, 5}.issubset(dice_set) or {2, 3, 4, 5, 6}.issubset(dice_set):
+        straight = (
+            [1, 2, 3, 4, 5] if {1, 2, 3, 4, 5}.issubset(dice_set) else [2, 3, 4, 5, 6]
+        )
+        remaining = dice.copy()
+        for d in straight:
+            remaining.remove(d)
+        return Combo.SMALL_STRAIGHT, 0, remaining
+
     if count_values == [3, 3]:
         return Combo.DOUBLE_TRIPS, 0, []
     if count_values == [2, 2, 2]:
@@ -61,6 +73,10 @@ def score_dice(
         case Combo.LARGE_STRAIGHT:
             score += Combo.LARGE_STRAIGHT.value
             data["Large Straight"] = Combo.LARGE_STRAIGHT.value
+
+        case Combo.SMALL_STRAIGHT:
+            score += Combo.SMALL_STRAIGHT.value
+            data["Small Straight"] = Combo.SMALL_STRAIGHT.value
 
         case Combo.THREE_PAIRS:
             score += Combo.THREE_PAIRS.value
