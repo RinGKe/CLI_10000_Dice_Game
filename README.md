@@ -74,7 +74,7 @@ Combos and Values
     - three of two numbers
     - ex: 4,4,4,6,6,6
 
-- Three Pairs (500 points)
+- Three Pairs (750 points)
     - single roll
     - ex: 6,6,4,4,3,3
 
