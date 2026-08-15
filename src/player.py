@@ -24,7 +24,9 @@ class Player:
             roll_bar.start()
             print()
 
-            print(roll)
+            for i in roll:
+                print(f"[{i}] ", end="")
+            print()
 
             user_input = [
                 int(x) for x in input("Select dice to keep... :\n") if x.isdigit()
@@ -39,7 +41,11 @@ class Player:
                 selection = roll
             print("\033[F\033[K", end="\r")
             print("\033[F\033[K", end="\r")
-            print(f"Held: {selection}")
+            # print(f"Held: {selection}")
+            print(f"Held: ", end="")
+            for i in selection:
+                print(f"[{i}] ", end="")
+            print()
 
             data = dice.check_selection(selection)
             if not data:
