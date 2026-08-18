@@ -96,7 +96,7 @@ def test_full():
     print("******************************")
 
 
-test_full()
+# test_full()
 
 # test_multi_round(3)
 
