@@ -8,12 +8,14 @@ from .dice import Dice
 class Player:
     def __init__(self, name: str = "", threshold: int = 0):
         self.name = name
+        self.base_threshold = threshold
         self.threshold = threshold
         self.score = 0
         self.isThreshold = False
 
     def play_turn(self, speed: float):
         dice = Dice(self.name)
+        print(f"* Need {self.threshold} points to score *")
         while True:
             roll = dice.roll_dice()
             if len(roll) == 6:
@@ -70,6 +72,9 @@ class Player:
                 print(f" BUST   {dice.current_score}")
                 print("<><><><> <><><>  <><")
                 self.score += 0
+                self.isThreshold = False
+                if dice.current_score < self.base_threshold:
+                    self.threshold = self.base_threshold - dice.current_score
                 break
 
             for k, v in data.items():
@@ -85,6 +90,7 @@ class Player:
             if not self.isThreshold:
                 if dice.current_score >= self.threshold:
                     self.isThreshold = True
+                    self.threshold = self.base_threshold
                 else:
                     print(
                         f"* Need '{self.threshold - dice.current_score}' more points! *"
@@ -127,12 +133,14 @@ class CPU(Player):
                 return 1.0
             else:
                 self.isThreshold = True
+                self.threshold = self.base_threshold
         if dice.active_dice == 6:
             return 1.0
         return dice.active_dice / (dice.amount - len(dice.addons))
 
     def play_turn(self, speed: float):
         dice = Dice(self.name)
+        print(f"* Need {self.threshold} points to score *")
         while True:
             roll = dice.roll_dice()
             if len(roll) == 6:
@@ -152,6 +160,8 @@ class CPU(Player):
                 print(f" BUST   {dice.current_score}")
                 print("<><><><> <><><>  <><")
                 self.score += 0
+                if dice.current_score < self.base_threshold:
+                    self.threshold = self.base_threshold - dice.current_score
                 break
 
             time.sleep(speed)

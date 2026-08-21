@@ -56,12 +56,12 @@ Combos and Values
     - Four of one number and two of another
     - ex: 4,4,4,4,6,6
 
-- Six of a kind ( x * 800 points) + (100 for each kind in next rolls)
+- Six of a kind ( x * 400 points) + (100 for each kind in next rolls)
     - Single roll +
     - Dies of same kind in additional rolls add 100 points
     - ex: 4,4,4,4,4,4 = 3200 points + 100 for evey new 4 in next rolls
 
-- Five of a kind ( x * 400 points) + (100 for each kind in next rolls)
+- Five of a kind ( x * 300 points) + (100 for each kind in next rolls)
     - Single roll +
     - Dies of same kind in additional rolls add 100 points
     - ex: 4,4,4,4,4 = 1600 points + 100 for evey new 4 in next rolls
