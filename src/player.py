@@ -20,6 +20,15 @@ class Player:
                 print("===========================\\\\\\")
                 print(f"                    Cup: {dice.cup_num}")
 
+            if dice.current_score == 0:
+                roll_throb = CLI_Throbber(
+                    f"ENTER to roll {dice.active_dice}",
+                    erase=True,
+                )
+                roll_throb.start()
+                entered = input()
+                roll_throb.stop()
+
             roll_bar = CLI_Throbber(f"Rolling {dice.active_dice}...", time=(speed * 2))
             roll_bar.start()
             print()
@@ -28,20 +37,26 @@ class Player:
                 print(f"[{i}] ", end="")
             print()
 
-            user_input = [
-                int(x) for x in input("Select dice to keep... :\n") if x.isdigit()
-            ]
-            roll_copy = roll.copy()
             selection = []
-            for c in user_input:
-                if c in roll_copy:
-                    selection.append(int(c))
-                    roll_copy.remove(int(c))
-            if not selection:
-                selection = roll
+            while not selection:
+                print("Select dice to keep... :\n", end="")
+                user_input = [int(x) for x in input() if x.isdigit()]
+                roll_copy = roll.copy()
+                for c in user_input:
+                    if c in roll_copy:
+                        selection.append(int(c))
+                        roll_copy.remove(int(c))
+                if not selection:
+                    print("\033[F\033[K", end="\r")
+                    if len(roll) == 1:
+                        selection.append(roll[0])
+                        break
+                    print("\033[F\033[K", end="\r")
+                    print("Invalid")
+                    time.sleep(0.2)
+                    print("\033[F\033[K", end="\r")
+
             print("\033[F\033[K", end="\r")
-            print("\033[F\033[K", end="\r")
-            # print(f"Held: {selection}")
             print(f"Held: ", end="")
             for i in selection:
                 print(f"[{i}] ", end="")
@@ -67,8 +82,8 @@ class Player:
             print(f"Dice to roll:  {dice.active_dice}")
             print("=========================")
 
-            if not self.isThreshold and (dice.current_score < self.threshold):
-                if dice.current_score >= self.threshold or self.score >= self.threshold:
+            if not self.isThreshold:
+                if dice.current_score >= self.threshold:
                     self.isThreshold = True
                 else:
                     print(
@@ -101,6 +116,7 @@ class Player:
                 )
                 print("<><><><><><><><><><><><><><><>")
                 self.score += dice.current_score
+                self.isThreshold = False
                 break
 
 
@@ -111,7 +127,6 @@ class CPU(Player):
                 return 1.0
             else:
                 self.isThreshold = True
-                return -1.0
         if dice.active_dice == 6:
             return 1.0
         return dice.active_dice / (dice.amount - len(dice.addons))
@@ -160,4 +175,5 @@ class CPU(Player):
                 )
                 print("<><><><><><><><><><><><><><><>")
                 self.score += dice.current_score
+                self.isThreshold = False
                 break

@@ -5,12 +5,15 @@ from enum import Enum
 class Combo(Enum):
     SPIDER_EYES = 10000
     DOUBLE_TRIPS = 2500
+    FULLEST_HOUSE = 2000
     LARGE_STRAIGHT = 1500
     SMALL_STRAIGHT = 1000
-    SIX_KIND = 800
-    FIVE_KIND = 400
-    FOUR_KIND = 200
     THREE_PAIRS = 750
+    FULL_HOUSE = 600
+    TWO_PAIRS = 250
+    SIX_KIND = 400
+    FIVE_KIND = 300
+    FOUR_KIND = 200
     THREE_KIND = 100
     NONE = 1
 
@@ -38,6 +41,19 @@ def eval_dice(dice: list[int]) -> tuple[Combo, int, list[int]]:
         return Combo.DOUBLE_TRIPS, 0, []
     if count_values == [2, 2, 2]:
         return Combo.THREE_PAIRS, 0, []
+    if count_values == [4, 2]:
+        return Combo.FULLEST_HOUSE, 0, []
+
+    if count_values == [3, 2] or count_values == [3, 2, 1]:
+        remaining = [d for d, c in counts.items() if c == 1]
+        return Combo.FULL_HOUSE, 0, remaining
+
+    if (
+        count_values == [2, 2, 1, 1]
+        or count_values == [2, 2, 1]
+        or count_values == [2, 2]
+    ):
+        return Combo.TWO_PAIRS, 0, []
 
     top_val, top_count = counts.most_common(1)[0]
     remaining = [d for d in dice if d != top_val]
@@ -70,6 +86,10 @@ def score_dice(
             score += Combo.DOUBLE_TRIPS.value
             data["Double Trips"] = Combo.DOUBLE_TRIPS.value
 
+        case Combo.FULLEST_HOUSE:
+            score += Combo.FULLEST_HOUSE.value
+            data["Fullest House"] = Combo.FULLEST_HOUSE.value
+
         case Combo.LARGE_STRAIGHT:
             score += Combo.LARGE_STRAIGHT.value
             data["Large Straight"] = Combo.LARGE_STRAIGHT.value
@@ -81,6 +101,14 @@ def score_dice(
         case Combo.THREE_PAIRS:
             score += Combo.THREE_PAIRS.value
             data["Three Pairs"] = Combo.THREE_PAIRS.value
+
+        case Combo.FULL_HOUSE:
+            score += Combo.FULL_HOUSE.value
+            data["Full House"] = Combo.FULL_HOUSE.value
+
+        case Combo.TWO_PAIRS:
+            score += Combo.TWO_PAIRS.value
+            data["Two Pairs"] = Combo.TWO_PAIRS.value
 
         case Combo.SIX_KIND:
             score += value * Combo.SIX_KIND.value

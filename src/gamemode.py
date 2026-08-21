@@ -9,7 +9,7 @@ class Gamemode:
         players: int = 1,
         cpus: int = 1,
         score: int = 10000,
-        threshold: int = 1000,
+        threshold: int = 500,
         pause: float = 1.0,
         speed: float = 1.0,
     ):
