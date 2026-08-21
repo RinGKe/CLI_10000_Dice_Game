@@ -70,7 +70,7 @@ Combos and Values
     - Single roll
     - ex: 1,2,3,4,5,6
 
-- Small Straight (1000 points)
+- Small Straight (800 points)
     - Single roll
     - ex 1,2,3,4,5
 
@@ -83,12 +83,12 @@ Combos and Values
     - single roll
     - ex: 6,6,4,4,3,3
 
-- Full House (600 points)
+- Full House (1000 points)
     - Single roll
     - Three of one number and two of another
     - ex: 4,4,4,6,6
 
-- Two Pairs (250 points)
+- Two Pairs (350 points)
     - Single roll
     - Two of one number and two of another
     - ex: 4,4,6,6
