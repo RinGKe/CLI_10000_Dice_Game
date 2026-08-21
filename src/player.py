@@ -160,6 +160,7 @@ class CPU(Player):
                 print(f" BUST   {dice.current_score}")
                 print("<><><><> <><><>  <><")
                 self.score += 0
+                self.isThreshold = False
                 if dice.current_score < self.base_threshold:
                     self.threshold = self.base_threshold - dice.current_score
                 break
