@@ -53,7 +53,8 @@ def eval_dice(dice: list[int]) -> tuple[Combo, int, list[int]]:
         or count_values == [2, 2, 1]
         or count_values == [2, 2]
     ):
-        return Combo.TWO_PAIRS, 0, []
+        remaining = [d for d, c in counts.items() if c == 1]
+        return Combo.TWO_PAIRS, 0, remaining
 
     top_val, top_count = counts.most_common(1)[0]
     remaining = [d for d in dice if d != top_val]
