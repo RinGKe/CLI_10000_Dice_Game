@@ -9,9 +9,8 @@ Rules
 - Not rolling or keeping any scorable dice results in a BUST ending your turn
 - Combos only count on single rolls
 - Some combos can increase in value with additional rolls (+) during the same cup
-- After getting on the board players can stop anytime after their first roll to keep points
-- First player to reach 10,000 points starts 'last round' of rolls
-- After the 'last round' the player with the most points wins
+- First player to reach 10,000 points starts last round of rolls
+- After the last round the player with the most points wins
 - 1's count as 10's where die value matters in combos
 
 CLI Game Directions
