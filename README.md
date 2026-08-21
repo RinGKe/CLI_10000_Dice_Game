@@ -1,11 +1,11 @@
 Description
 
-This is a simple CLI recreation of a game my family created and likes to play called 10,000. Originaly played with dice, you take turns rolling to score points. The first to reach 10,000 points wins. Not rolling specific numbers can result in a bust where you lose all of the points gained during that turn. This version is you against a CPU player.
+This is a simple CLI recreation based off of a game my family created and likes to play called 10,000. Originaly played with dice, you take turns rolling to score points. The first to reach 10,000 points wins. Not rolling specific numbers can result in a bust where you lose all of the points gained during that turn. This version is you against a CPU player.
 
 Rules
 
-- Need to roll at least 1,000 points in one turn to get on the board
-- Have to roll and keep at least a '1', a '5', or 'combo' to keep rolling
+- Need to roll at least 500 points to keep rolling score
+- Have to keep at least one scoring die or combo ('1', a '5', or 'combo') to keep rolling
 - Not rolling or keeping any scorable dice results in a BUST ending your turn
 - Combos only count on single rolls
 - Some combos can increase in value with additional rolls (+) during the same cup
@@ -19,7 +19,6 @@ CLI Game Directions
 - When prompted, you can type a response and press ENTER to submit it
 - Submitting nothing counts as yes to (Y/N) questions
 - Type every die value you want to keep and confirm with ENTER. Spaces don't matter and only numbers that exist in the roll will count.
-- Submitting nothing for dice selection auto fills all dice and scores possible combos for you
 - CPU opponents play and make choices by themselves
 
 Game Settings Options
@@ -47,6 +46,16 @@ Combos and Values
     - six ones
     - ex: 1,1,1,1,1,1
 
+- Double Trips (2500 points)
+    - Single roll
+    - three of two numbers
+    - ex: 4,4,4,6,6,6
+
+- Fullest House (2000 points)
+    - Single roll
+    - Four of one number and two of another
+    - ex: 4,4,4,4,6,6
+
 - Six of a kind ( x * 800 points) + (100 for each kind in next rolls)
     - Single roll +
     - Dies of same kind in additional rolls add 100 points
@@ -70,14 +79,19 @@ Combos and Values
     - Dies of same kind in additional rolls add 100 points
     - ex: 4,4,4,4 = 800 points + 100 for every new 4 in next rolls
 
-- Double Trips (2500 points)
-    - Single roll
-    - three of two numbers
-    - ex: 4,4,4,6,6,6
-
 - Three Pairs (750 points)
     - single roll
     - ex: 6,6,4,4,3,3
+
+- Full House (600 points)
+    - Single roll
+    - Three of one number and two of another
+    - ex: 4,4,4,6,6
+
+- Two Pairs (250 points)
+    - Single roll
+    - Two of one number and two of another
+    - ex: 4,4,6,6
 
 - Three of a Kind (x * 100 points) + (100 for each kind in next rolls)
     - ex: 4,4,4 = 400 points + 100 for every new 4 in next rolls
