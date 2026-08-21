@@ -18,6 +18,7 @@ CLI Game Directions
 - When prompted, you can type a response and press ENTER to submit it
 - Submitting nothing counts as yes to (Y/N) questions
 - Type every die value you want to keep and confirm with ENTER. Spaces don't matter and only numbers that exist in the roll will count.
+- Submitting nothing for dice selection results in a "bust"
 - CPU opponents play and make choices by themselves
 
 Game Settings Options

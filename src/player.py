@@ -43,6 +43,13 @@ class Player:
             while not selection:
                 print("Select dice to keep... :\n", end="")
                 user_input = [int(x) for x in input() if x.isdigit()]
+                if not user_input:
+                    print("\033[F\033[K", end="\r")
+                    if len(roll) == 1:
+                        selection.append(roll[0])
+                        break
+                    selection = []
+                    break
                 roll_copy = roll.copy()
                 for c in user_input:
                     if c in roll_copy:
@@ -50,9 +57,6 @@ class Player:
                         roll_copy.remove(int(c))
                 if not selection:
                     print("\033[F\033[K", end="\r")
-                    if len(roll) == 1:
-                        selection.append(roll[0])
-                        break
                     print("\033[F\033[K", end="\r")
                     print("Invalid")
                     time.sleep(0.2)
@@ -60,6 +64,8 @@ class Player:
 
             print("\033[F\033[K", end="\r")
             print(f"Held: ", end="")
+            if not selection:
+                print("-", end="")
             for i in selection:
                 print(f"[{i}] ", end="")
             print()
